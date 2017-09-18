@@ -89,7 +89,7 @@ class App extends Component {
             <h2>You are logged out</h2>
           )
           : (
-            <LoggedInContainer username="Toto The First Doggo" />
+            <LoggedInContainer username="Tata the Second Doggo" />
           )
         }
       </div>
