@@ -10,6 +10,7 @@ class App extends Component {
 
     this.state = {
       isLoggedIn: false,
+      page: "home",
     }
 
     // Initialize Firebase
@@ -23,6 +24,10 @@ class App extends Component {
     }
 
     firebase.initializeApp(firebaseConfig)
+
+    var database = firebase.database();
+
+    const rootRef = firebase.database.ref;
   }
 
   componentDidMount() {
@@ -56,6 +61,7 @@ class App extends Component {
       const userId = user.uid
 
       this.state = {
+        loggerIn: user,
         database: firebase.database().ref('/users/').child(userId),
         isLoading: false,
         isLoggedIn: true
@@ -75,6 +81,11 @@ class App extends Component {
     })
   }
 
+  setPage(destination){
+    this.setState({
+      page: destination
+    })
+  }
 
   render() {
     return (
@@ -83,13 +94,19 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Bork Bork World</h2>
         </div>
+        <button onClick={ this.setPage.bind(this, "home") }>Home</button>
+        <button onClick={ this.setPage.bind(this, "account") }>Account</button>
+        <button onClick={ this.setPage.bind(this, "request") }>Request</button>
+        <button onClick={ this.setPage.bind(this, "contribute") }>Contribute</button>
+        <button onClick={ this.setPage.bind(this, "vote") }>Vote</button>
+
         {
           !this.state.isLoggedIn ?
           (
             <h2>You are logged out</h2>
           )
           : (
-            <LoggedInContainer username="Tata the Second Doggo" />
+            <LoggedInContainer database={ this.state.database } page={ this.state.page }  />
           )
         }
       </div>

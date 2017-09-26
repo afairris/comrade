@@ -1,39 +1,43 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import AccountPage from '../AccountPage';
+import RequestPage from '../RequestPage';
+import ContributePage from '../ContributePage';
+import VotePage from '../VotePage';
 
 class LoggedInContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      text: "Initial Text"
-    }
-  }
+  // constructor(props) {
+  //   super(props)
+  //
+  // }
 
-  SubmitClick(){
-  this.setState({ text: this.refs.TextBox.value });
-  window.alert( this.state.text );
-}
-
-  componentDidMount() {
-    //this.props.database.update({
-    //  lastLogin: Date.now()
-    //})
-  }
-
+ 
   render() {
-    return (
-      <div>
-        <div className="appTitle">
-          Comrade Doggo
-        </div>
-        <div className="InputStuff">
-        <input ref="TextBox" type="text" placeholder="Enter Text Here" />
-        <button onClick={ this.SubmitClick.bind(this) }>The Button</button>
-        </div>
-        <div className="pageContents">
-          { this.props.username }
-        </div>
-      </div>
-    )
+    switch (this.props.page) {
+      case "account":
+        return <AccountPage database={ this.props.database }/>
+        break;
+      case "request":
+        return <RequestPage database={ this.props.database }/>
+        break;
+      case "contribute":
+        return <ContributePage database={ this.props.database }/>
+        break;
+      case "vote":
+        return <VotePage database={ this.props.database }/>
+        break;
+
+      default:
+        return (
+          <div>
+            <div className="appTitle">
+              Home Page
+            </div>
+          </div>
+        )
+        break;
+    }
+
+
   }
 }
 
