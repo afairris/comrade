@@ -11,8 +11,7 @@ class AccountPage extends Component {
   }
 
   handleSubmit(){
-    // firebase.database().ref('/users').set({ username : this.props.database.username });
-    this.props.database.set({ 
+    this.props.userdb.set({
       DeliveryName: this.state.DeliveryName,
       DeliveryAddress: this.state.DeliveryAddress,
     });
@@ -25,7 +24,7 @@ class AccountPage extends Component {
 
   componentDidMount() {
      // Load state from DB
-    this.props.database.on('value', (snapshotData) => {
+    this.props.userdb.on('value', (snapshotData) => {
       console.log(snapshotData.val())
       if (snapshotData.val()) {
 
@@ -50,9 +49,6 @@ class AccountPage extends Component {
         </div>
         <div>
         <button onClick={ this.handleSubmit.bind(this) }>Submit</button>
-        </div>
-        <div className="pageContents">
-          { this.props.username }
         </div>
       </div>
     )

@@ -24,10 +24,6 @@ class App extends Component {
     }
 
     firebase.initializeApp(firebaseConfig)
-
-    var database = firebase.database();
-
-    const rootRef = firebase.database.ref;
   }
 
   componentDidMount() {
@@ -40,10 +36,12 @@ class App extends Component {
       console.log('Logged in', user.uid)
 
       // Set DB base
-      const database = firebase.database().ref('/users/').child(user.uid)
+      const userdb = firebase.database().ref('/users/').child(user.uid)
+      const requestdb = firebase.database().ref('/requests').child(user.uid)
 
       this.setState({
-        database,
+        userdb,
+        requestdb,
         isLoading: false,
         isLoggedIn: true
       })
@@ -62,7 +60,8 @@ class App extends Component {
 
       this.state = {
         loggerIn: user,
-        database: firebase.database().ref('/users/').child(userId),
+        userdb: firebase.database().ref('/users/').child(userId),
+        requestdb: firebase.database().ref('/requests/').child(userId),
         isLoading: false,
         isLoggedIn: true
       }
@@ -106,7 +105,7 @@ class App extends Component {
             <h2>You are logged out</h2>
           )
           : (
-            <LoggedInContainer database={ this.state.database } page={ this.state.page }  />
+            <LoggedInContainer userdb={ this.state.userdb } page={ this.state.page } requestdb={ this.state.requestdb }  />
           )
         }
       </div>

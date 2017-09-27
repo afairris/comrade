@@ -23,7 +23,7 @@ class VotePage extends Component {
 
   componentDidMount() {
     // Load state from DB
-    this.props.database.on('value', (snapshotData) => {
+    this.props.userdb.on('value', (snapshotData) => {
       console.log(snapshotData.val())
       if (snapshotData.val()) {
 

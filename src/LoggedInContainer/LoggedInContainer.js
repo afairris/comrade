@@ -14,16 +14,16 @@ class LoggedInContainer extends Component {
   render() {
     switch (this.props.page) {
       case "account":
-        return <AccountPage database={ this.props.database }/>
+        return <AccountPage userdb={ this.props.userdb } requestdb={ this.props.requestdb }/>
         break;
       case "request":
-        return <RequestPage database={ this.props.database }/>
+        return <RequestPage userdb={ this.props.userdb } requestdb={ this.props.requestdb }/>
         break;
       case "contribute":
-        return <ContributePage database={ this.props.database }/>
+        return <ContributePage userdb={ this.props.userdb } requestdb={ this.props.requestdb }/>
         break;
       case "vote":
-        return <VotePage database={ this.props.database }/>
+        return <VotePage userdb={ this.props.userdb } requestdb={ this.props.requestdb }/>
         break;
 
       default:
