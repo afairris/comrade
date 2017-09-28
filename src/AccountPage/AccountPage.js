@@ -6,7 +6,8 @@ class AccountPage extends Component {
     this.state = {
 
       DeliveryName: "Please Enter Delivery Name",
-      DeliveryAddress: "Please Enter Delivery Address"
+      DeliveryAddress: "Please Enter Delivery Address",
+      Group: "Please Select Group"
     }
   }
 
@@ -14,6 +15,7 @@ class AccountPage extends Component {
     this.props.userdb.set({
       DeliveryName: this.state.DeliveryName,
       DeliveryAddress: this.state.DeliveryAddress,
+      Group: this.state.Group,
     });
     console.log("Updated");
   }
@@ -48,7 +50,16 @@ class AccountPage extends Component {
         <input value={ this.state.DeliveryAddress } onChange={ (event) => this.handleChange({ DeliveryAddress: event.target.value })} type="text" placeholder="Delivery Address" />
         </div>
         <div>
-        <button onClick={ this.handleSubmit.bind(this) }>Submit</button>
+          <select value={this.state.Group} onChange={ (event) => this.handleChange({ Group: event.target.value })}>
+            <option value="Please Select Group">Please Select Group</option>
+            <option value="Conclave of Borkistan">Conclave of Borkistan</option>
+          </select>
+        </div>
+        <div>
+          <button onClick={ this.handleSubmit.bind(this) }>Submit</button>
+        </div>
+        <div>
+          <p>{"For a new group, contact the Giant British Puppy"}</p>
         </div>
       </div>
     )
